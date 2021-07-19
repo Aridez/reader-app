@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col flex-grow bg-white dark:bg-gray-900 px-4 py-6">
+  <div
+    class="flex flex-col flex-grow bg-white dark:bg-gray-900 px-4 py-6 w-full"
+  >
     <div
       class="
         flex flex-row
@@ -12,7 +14,6 @@
         w-full
       "
     >
-
       <div class="ml-auto">
         <ul class="flex flex-row items-center space-x-2">
           <li>
@@ -87,13 +88,24 @@
         </ul>
       </div>
     </div>
-    <div class="h-full overflow-hidden py-4">
-      <div class="h-full overflow-y-auto">
-        <img
-          class="h-full w-full"
-          src="local-resource:///I:/Desktop/design.png"
-        />
-      </div>
+    <div
+      class="
+        flex 
+        p-4
+        w-full
+        overflow-hidden
+      "
+      ref="container"
+    >
+      <v-stage :config="configKonva">
+        <v-layer>
+          <v-image
+            :config="{
+              image: image,
+            }"
+          />
+        </v-layer>
+      </v-stage>
     </div>
   </div>
 </template>
@@ -110,10 +122,16 @@ import {
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 export default {
-  name: "Chat",
+  name: "Reader",
   props: {},
   data() {
-    return {};
+    return {
+      configKonva: {
+        width: 600,
+        height: 100,
+      },
+      image: null,
+    };
   },
   beforeCreate() {
     this.$library.add(
@@ -132,6 +150,32 @@ export default {
         console.log(result);
       });
     },
+    onResize() {
+      const container = this.$refs.container;
+
+      if (!container) {
+        return;
+      }
+
+      const height = container.offsetHeight;
+      const width = container.offsetWidth;
+
+      console.log(width, height, container.width, container.height);
+      this.configKonva.width = width;
+      this.configKonva.height = height;
+    },
   },
+  created() {
+    const image = new window.Image();
+    image.src = "local-resource:///I:/Desktop/design.png";
+    image.onload = () => {
+      // set image only when it is loaded
+      this.image = image;
+    };
+  },
+  mounted() {
+    this.ro = new ResizeObserver(this.onResize)
+    .observe(this.$refs.container)
+  }
 };
 </script>
