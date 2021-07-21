@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ dark: isDarkModeActive }"
-    class="flex flex-row h-screen antialiased text-gray-800"
+    class="flex flex-row h-screen antialiased text-gray-800 bg-gray-100"
   >
     <Toolbar
       @toggle-dark-mode="isDarkModeActive = !isDarkModeActive"
@@ -12,10 +12,12 @@
       leave-active-class="transition-all ease-in-out duration-500"
       enter-class="-ml-72"
       enter-active-class="transition-all ease-in-out duration-500"
+      v-on:after-enter="$refs.reader.onResize()"
+      v-on:after-leave="$refs.reader.onResize()"
     >
       <Sidebar v-show="isSidebarVisible" />
     </transition>
-    <reader />
+    <reader ref="reader" />
   </div>
 </template>
 

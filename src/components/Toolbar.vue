@@ -1,6 +1,7 @@
 <template>
-  <div
-    class="
+  <div class="bg-gray-100 p-4 flex z-10">
+    <div
+      class="
       flex flex-col
       items-center
       py-4
@@ -8,12 +9,13 @@
       w-20
       bg-indigo-800
       dark:bg-gray-700
-      z-10
+      z-20
+      rounded-xl
     "
-  >
-    <a
-      href="#"
-      class="
+    >
+      <a
+        href="#"
+        class="
         flex
         items-center
         justify-center
@@ -24,15 +26,15 @@
         rounded-full
         dark:text-gray-700
       "
-      @click="toggleSidebar()"
-    >
-      <font-awesome-icon :icon="['far', 'comments']" size="lg" />
-    </a>
-    <ul class="flex flex-col space-y-2 mt-12">
-      <li>
-        <a href="#" class="flex items-center">
-          <span
-            class="
+        @click="toggleSidebar()"
+      >
+        <font-awesome-icon :icon="['far', 'comments']" size="lg" />
+      </a>
+      <ul class="flex flex-col space-y-2 mt-12">
+        <li>
+          <a href="#" class="flex items-center">
+            <span
+              class="
               flex
               items-center
               justify-center
@@ -43,15 +45,15 @@
               rounded-2xl
               dark:hover:bg-gray-600
             "
-          >
-            <font-awesome-icon :icon="['fas', 'home']" size="lg" />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="flex items-center">
-          <span
-            class="
+            >
+              <font-awesome-icon :icon="['fas', 'home']" size="lg" />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center">
+            <span
+              class="
               flex
               items-center
               justify-center
@@ -62,15 +64,15 @@
               rounded-2xl
               dark:hover:bg-gray-600
             "
-          >
-            <font-awesome-icon :icon="['fas', 'comment-dots']" size="lg" />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="flex items-center">
-          <span
-            class="
+            >
+              <font-awesome-icon :icon="['fas', 'comment-dots']" size="lg" />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center">
+            <span
+              class="
               flex
               items-center
               justify-center
@@ -81,15 +83,15 @@
               rounded-2xl
               dark:hover:bg-gray-600
             "
-          >
-            <font-awesome-icon :icon="['fas', 'calendar-minus']" size="lg" />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="flex items-center">
-          <span
-            class="
+            >
+              <font-awesome-icon :icon="['fas', 'calendar-minus']" size="lg" />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center">
+            <span
+              class="
               flex
               items-center
               justify-center
@@ -100,14 +102,14 @@
               rounded-2xl
               dark:hover:bg-gray-600
             "
-          >
-            <font-awesome-icon :icon="['fas', 'cog']" size="lg" />
-          </span>
-        </a>
-      </li>
-    </ul>
-    <button
-      class="
+            >
+              <font-awesome-icon :icon="['fas', 'cog']" size="lg" />
+            </span>
+          </a>
+        </li>
+      </ul>
+      <button
+        class="
         mt-auto
         flex
         items-center
@@ -120,10 +122,11 @@
         dark:text-gray-500
         dark:hover:text-white
       "
-      @click="toggleDarkMode()"
-    >
-      <font-awesome-icon :icon="['far', 'moon']" size="lg" />
-    </button>
+        @click="toggleDarkMode()"
+      >
+        <font-awesome-icon :icon="['far', 'moon']" size="lg" />
+      </button>
+    </div>
   </div>
 </template>
 

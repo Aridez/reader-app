@@ -1,103 +1,35 @@
 <template>
   <div
-    class="flex flex-col flex-grow bg-white dark:bg-gray-900 px-4 py-6 w-full"
+    class="flex flex-col justify-center flex-grow w-full"
   >
     <div
       class="
         flex flex-row
-        items-center
         py-4
         px-6
-        rounded-2xl
-        border
+        border-b-2
         dark:border-gray-700
         w-full
+        dark:text-white
+        dark:bg-gray-800
+        fixed
+        z-10
       "
     >
-      <div class="ml-auto">
-        <ul class="flex flex-row items-center space-x-2">
-          <li>
-            <a
-              href="#"
-              class="
-                flex
-                items-center
-                justify-center
-                bg-gray-100
-                hover:bg-gray-200
-                text-gray-400
-                h-10
-                w-10
-                rounded-full
-                dark:bg-gray-600
-                dark:hover:bg-gray-700
-                dark:text-white
-              "
-            >
-              <span>
-                <font-awesome-icon :icon="['fas', 'phone']" />
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="
-                flex
-                items-center
-                justify-center
-                bg-gray-100
-                hover:bg-gray-200
-                text-gray-400
-                h-10
-                w-10
-                rounded-full
-                dark:bg-gray-600
-                dark:hover:bg-gray-700
-                dark:text-white
-              "
-            >
-              <span>
-                <font-awesome-icon :icon="['fas', 'video']" />
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="
-                flex
-                items-center
-                justify-center
-                bg-gray-100
-                hover:bg-gray-200
-                text-gray-400
-                h-10
-                w-10
-                rounded-full
-                dark:bg-gray-600
-                dark:hover:bg-gray-700
-                dark:text-white
-              "
-            >
-              <span>
-                <font-awesome-icon :icon="['fas', 'ellipsis-v']" />
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      Text here...
     </div>
     <div
-      class="
+      class=" 
         flex 
-        p-4
+        justify-center
+        p-0
         w-full
-        overflow-hidden
+        h-full
+        z-0
       "
       ref="container"
     >
-      <v-stage :config="configKonva">
+      <v-stage :config="configKonva" ref="stage" @wheel="zoom">
         <v-layer>
           <v-image
             :config="{
@@ -129,6 +61,9 @@ export default {
       configKonva: {
         width: 600,
         height: 100,
+        draggable: true,
+        scaleX: 1,
+        scaleY: 1,
       },
       image: null,
     };
@@ -151,18 +86,31 @@ export default {
       });
     },
     onResize() {
-      const container = this.$refs.container;
+      this.configKonva.width = 0;
+      this.configKonva.height = 0;
 
-      if (!container) {
-        return;
-      }
+      this.$nextTick(() => {
+        const container = this.$refs.container;
 
-      const height = container.offsetHeight;
-      const width = container.offsetWidth;
+        if (!container) {
+          return;
+        }
+        const rect = container.getBoundingClientRect();
 
-      console.log(width, height, container.width, container.height);
-      this.configKonva.width = width;
-      this.configKonva.height = height;
+        const height = rect.height;
+        const width = rect.width;
+        this.configKonva.width = width;
+        this.configKonva.height = height;
+      });
+    },
+    zoom(e) {
+      var scaleBy = 1.02;
+      var oldScale = this.configKonva.scaleX;
+
+      var newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
+      console.log(oldScale);
+      this.configKonva.scaleX = newScale;
+      this.configKonva.scaleY = newScale;
     },
   },
   created() {
@@ -174,8 +122,9 @@ export default {
     };
   },
   mounted() {
-    this.ro = new ResizeObserver(this.onResize)
-    .observe(this.$refs.container)
-  }
+    //this.ro = new ResizeObserver(this.onResize).observe(this.$refs.container);
+    window.addEventListener("resize", this.onResize);
+    this.onResize();
+  },
 };
 </script>
