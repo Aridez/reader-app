@@ -81,3 +81,32 @@ bring icpmain and renderer (preload) in
 bring in preload script in vue.config.js
 workers and how they are used
 activate dark mode in tailwind.config.js using dark mode as class
+
+- Tools (top)
+  - Drag, zoom mode & select translations mode
+  - Rectangle creation & OCR
+  - Fit image / center in canvas
+  - Page management (next/ previous)
+  - Show/hide rectangles
+  - two page layout?
+  - jump to chapter/page?
+- OCR text of square (bottom)
+- Canvas
+- Reading list
+  - Show current page
+  - Import new reads
+  - Delete reads
+  - CRUD on chapters / pages?
+
+Left: Sidebar with many "tabs", square border 0
+Right: Canvas with tools on top and text on bottom (overlayed maybe?)
+On click tab open second sidebar, overlayed over canvas 
+-> what happens with tools? maybe can keep normal position flex and canvas be absolute positioned?
+  
+
+  Reading list with books -> chapters -> pages (navigable)
+  Import page -> just drag and drop a .jpg
+  Import chapter -> drag and drop a folder
+  Import book -> not yet? 
+
+  create router
